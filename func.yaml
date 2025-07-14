@@ -5,3 +5,15 @@ name: rabbitmq-function
 runtime: python
 created: 2025-07-14T13:09:36.994928+05:30
 invoke: cloudevent
+build:
+  git:
+    url: https://github.com/callingramani/my-function.git   # required, git repository with the function source code
+    revision: main                                    # optional, git revision to be used (branch, tag, commit)
+    # contextDir: myfunction                          # optional, needed only if the function is not located in the repository root folder
+  buildpacks: []
+  builder: ""
+  buildEnvs: []
+deploy:
+  namespace: rabbitmq-system
+  annotations:
+    autoscaling.knative.dev/minScale: "1"
